@@ -1,6 +1,5 @@
 import react from "react"
 import express from 'express';
-import "dotenv/config"
 import cors from 'cors'
 import cookieParser from 'cookie-parser';
 import ConnectDB from "./controllers/mongodb.js"
@@ -11,6 +10,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
 import apiRouter from "./router/apiRouter.js";
+import dotenv from "dotenv"
 
 
 const app = express()
@@ -18,6 +18,7 @@ const port = process.env.PORT || 4000
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 dotenv.config()
+
 
 app.use(express.json())
 app.use(express.urlencoded({
