@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { AppContext } from "../context/appContext";
 function Login() {
   const navigate = useNavigate();
-  const { setIsLoggedIn, setUserData } = useContext(AppContext)!;
+  const {setIsLoggedIn, setUserData} = useContext(AppContext)!;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -82,7 +82,7 @@ function Login() {
                     ></input>
                   </div>
                 </div>
-                <div className="pt-4 flex items-center justify-center">
+                <div classNamegit push -u origin main="pt-4 flex items-center justify-center">
                   <button
                     type="submit"
                     className="bg-black text-white px-4 py-2 rounded-2xl hover:bg-amber-950"
