@@ -4,21 +4,20 @@ node_modules/
 # Build output
 build/
 dist/
-.parcel-cache/ # If you're using Parcel bundler
-.next/        # If you're using Next.js
-.vite/        # If you're using Vite
+.parcel-cache/
+.next/
+.vite/
 
-# Environment variables (CRITICAL for your case)
+# Environment variables (CRITICAL)
 server/.env
 .env.local
 .env.*.local
 
-# Git LFS cache (usually automatically handled, but good to list)
+# Git LFS cache (no longer needed if ignoring all PDFs, but harmless)
 .git/lfs/
 
-# Large files that should be ignored if not managed by LFS
-# (Though LFS is the better solution if you want them versioned)
-# server/uploads/courses/*.pdf
+# Ignore ALL PDF files
+*.pdf
 
 # Common OS and editor files
 .DS_Store
