@@ -1,15 +1,35 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+
+type Category = {
+  _id: string;
+  categoryName: string;
+};
+
 function ManageCategory() {
-  const [categoryName, setCategoryName] = useState([]);
+  const [categories, setCategories] = useState<Category[]>([]);
+
   useEffect(() => {
     axios
       .get("http://localhost:4000/api/course/getCategories")
-      .then((categoryName) => setCategoryName(categoryName.data))
+      .then((res) => setCategories(res.data))
       .catch((err) => {
         console.log(err);
       });
-  });
+  }, []);
+
+  const handleDelete = async (id: string) => {
+    try {
+      await axios.delete(
+        `http://localhost:4000/api/course/deleteCategory/${id}`
+      );
+      setCategories((prev) => prev.filter((cat) => cat._id !== id));
+    } catch (error) {
+      console.error(error);
+      alert("Error deleting category.");
+    }
+  };
+
   return (
     <>
       <div className="flex items-center justify-center pt-20">
@@ -27,14 +47,17 @@ function ManageCategory() {
               </tr>
             </thead>
             <tbody>
-              {categoryName.map((item, index) => (
-                <tr key={index} className="border-b">
+              {categories.map((item) => (
+                <tr key={item._id} className="border-b">
                   <td className="px-6 py-3">{item.categoryName}</td>
                   <td className="px-6 py-3 text-right">
                     <button className="px-4 py-2 bg-black rounded-2xl hover:bg-amber-950 text-white">
                       Edit
                     </button>
-                    <button className="ml-4 px-4 py-2 bg-red-600 rounded-2xl hover:bg-amber-950 text-white">
+                    <button
+                      className="ml-4 px-4 py-2 bg-red-600 rounded-2xl hover:bg-amber-950 text-white"
+                      onClick={() => handleDelete(item._id)}
+                    >
                       Delete
                     </button>
                   </td>
@@ -57,4 +80,5 @@ function ManageCategory() {
     </>
   );
 }
+
 export default ManageCategory;

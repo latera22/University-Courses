@@ -11,6 +11,7 @@ import ManageUser from "./component/function/view/mangeUser";
 import AddCategory from "./component/function/adding/addCategory";
 import ManageCategory from "./component/function/view/manageCategory";
 import Chatbot from "./component/function/chatbot";
+import EditCourse from "./component/edit/editCourse";
 function App() {
   return (
     <>
@@ -45,6 +46,7 @@ function App() {
         <Route path="/auth/signup" element={<Signup />} />
         <Route path="/function/home" element={<Dashboard />} />
         <Route path="/function/chatbot" element={<Chatbot />} />
+        <Route path="/edit-course/:id" element={<EditCourse />} />
         <Route path="/" element={<Dashboard />} />
       </Routes>
     </>

@@ -84,3 +84,66 @@ export const courseAdding = async (req, res, next) => {
     }
   });
 };
+
+export const deleteCourse = async(req, res) => { 
+  try {
+    const deletedCourse = await courseModel.findByIdAndDelete(req.params.id);
+    if (!deletedCourse) {
+      return res.status(404).json({ success: false, message: "Course Not Found" }); // ← fixed , to .
+    }
+    res.status(200).json({ success: true, message: "Course deleted successfully" });
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+};
+
+export const updateCourse = async (req, res) => {
+  try {
+    const { name, description, image, university, categoryId, file } = req.body;
+
+    const updatedCourse = await courseModel.findByIdAndUpdate(
+      req.params.id,
+      {
+        name,
+        description,
+        image,
+        university,
+        categoryId,
+        file,
+      },
+      { new: true } // Return the updated document
+    );
+
+    if (!updatedCourse) {
+      return res.status(404).json({ success: false, message: "Course not found" });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Course updated",
+      course: updatedCourse,
+    });
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+};
+
+export const getCourseById = async (req, res) => {
+  const course = await courseModel.findById(req.params.id);
+  if (!course) {
+    return res.status(404).json({ message: "Course not found" });
+  }
+  res.status(200).json(course);
+};
+
+export const deleteCategory = async(req, res)=>{
+  try{
+    const deletedCategory = await categoryModel.findByIdAndDelete(req.params.id);
+  if(!deletedCategory){
+    return res.status(404).json({success:false, message:"Category not found"});
+  }
+  res.status(200).json({success:true, message:"This Category was deleted successfully"});
+  }catch(err){
+    return res.status(500).json({success:false, error:err.message});
+  }
+}

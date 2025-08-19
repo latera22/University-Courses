@@ -36,7 +36,6 @@ app.use('/api/user', userRouter)
 app.use("/api/course", courseRouter)
 app.use("/uploads", express.static("uploads"));
 app.use('/upload/photos/', express.static(path.join(__dirname, 'upload/photos/')));
-
 app. use("/api", apiRouter)
 
 
