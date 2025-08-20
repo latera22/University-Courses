@@ -12,6 +12,7 @@ import AddCategory from "./component/function/adding/addCategory";
 import ManageCategory from "./component/function/view/manageCategory";
 import Chatbot from "./component/function/chatbot";
 import EditCourse from "./component/edit/editCourse";
+import CourseDetail from "./component/function/courseDetail";
 function App() {
   return (
     <>
@@ -47,6 +48,7 @@ function App() {
         <Route path="/function/home" element={<Dashboard />} />
         <Route path="/function/chatbot" element={<Chatbot />} />
         <Route path="/edit-course/:id" element={<EditCourse />} />
+        <Route path="/courses/:id" element={<CourseDetail />} />
         <Route path="/" element={<Dashboard />} />
       </Routes>
     </>
