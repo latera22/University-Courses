@@ -8,12 +8,12 @@ export const registration = async (req, res)=>{
     const{name, email, password} = req.body
 
     if(!name||!email ||!password){
-        return res.status(400).json({success:false, message:"Missing Details"})
+        return res.json({success:false, message:console.log("Missing Deta")})
     }
     try{
         const existingEmail = await userModel.findOne({email})
         if(existingEmail){
-            return res.status(409).json({success:false , message:"Email Already Exists"})
+            return res.json({success:false , message:console.log("Email Already Exists")})
         }
         const hashedPassword = await bcrypt.hash(password, 10)
 
@@ -54,23 +54,24 @@ export const registration = async (req, res)=>{
 /////////////////////////////////////////
 export const login = async (req, res)=>{
     const {email, password} = req.body;
+    const user = await userModel.findOne({ email }); // Rename to "user"
 
     if(!email || !password){
-        return res.status(400).json({
+        return res.json({
             success:false, message:"Missing Details"
         })
     }
-    const user = await userModel.findOne({email})
+    const existingEmail = await userModel.findOne({email})
 
-    if(!user){
-        return res.status(404).json({
+    if(!existingEmail){
+        return res.json({
             success:false, message:"User Email Does not exist"
         })
     }
     const isPasswordMatch = await bcrypt.compare(password, user.password)
 
     if(!isPasswordMatch){
-        return res.status(401).json({success:false, message: "Invalid credentials"})
+        return res.json({success:false, message: "Invalid password"})
     }
     const token  = jwt.sign({id: user._id, role: user.role }, process.env.JWT_SECRET, {expiresIn: "7d"})
 
@@ -211,7 +212,7 @@ export const resetPassword = async(req, res) => {
         if(!user){
             return res.json({success:false, message:"User not found"})
         }
-        if(user.resetOtp === "" || user.resetOtp !== otp){
+        if(user.resetOtp === "" || user.resetOtp ===!otp){
             return res.json({success:false, message: "Invalid OTP"})
         }
         if(user.resetOtpExpireAt < Date.now()){

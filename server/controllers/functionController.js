@@ -74,7 +74,8 @@ export const courseAdding = async (req, res, next) => {
         description,
         image: imagePath,
         category: categoryId,
-        courseFile: courseFilePath, //         university,
+        courseFile: courseFilePath,
+        university,
       });
 
       await newCourse.save();
