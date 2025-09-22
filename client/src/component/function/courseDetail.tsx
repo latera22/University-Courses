@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import axios from "axios";
 import { Box, CircularProgress, Typography } from "@mui/material";
 
 interface Course {
@@ -21,8 +20,19 @@ const CourseDetail: React.FC = () => {
     const fetchCourse = async () => {
       try {
         // This assumes you have a backend endpoint to get a single course by its ID
-        const response = await axios.get(`/api/course/${id}`);
-        setCourse(response.data);
+        const response = await api.get(`/course/${id}`);
+        // Ensure the response is a non-null object before setting the state
+        if (typeof response.data === "object" && response.data !== null) {
+          setCourse(response.data);
+        } else {
+          setError(
+            "Failed to fetch course details: Invalid data format received."
+          );
+          console.error(
+            "Received unexpected data format for a single course:",
+            response.data
+          );
+        }
       } catch (err) {
         setError("Failed to fetch course details.");
         console.error(err);

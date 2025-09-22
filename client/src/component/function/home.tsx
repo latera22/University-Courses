@@ -1,10 +1,9 @@
 import userSide from "../../assets/userSide.jpeg";
 import { useNavigate } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
-import axios from "axios";
 import { AppContext } from "../context/appContext";
 import Footer from "../common/Footer"; // Corrected import path
-
+import axios from "axios"
 // Define Course Type
 interface Course {
   id: number;
@@ -21,13 +20,19 @@ function Dashboard() {
 
   useEffect(() => {
     axios
-      .get("/api/course/getCourse")
+      .get("http://localhost:4000/api/course/getCourse") 
       .then((response) => {
-        console.log("Courses:", response.data); // 🔍 Check this!
-        setCourses(response.data);
+        if (Array.isArray(response.data)) {
+          setCourses(response.data);
+        } else {
+          console.error(
+            "Error fetching courses: Data is not an array",
+            response.data
+          );
+        }
       })
       .catch((error) => {
-        console.error("Error fetching courses:", error);
+        console.error("Error fetching courses with axios:", error);
       });
   }, []);
   // If context is not available, return null or a loading state
