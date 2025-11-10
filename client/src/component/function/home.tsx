@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../context/appContext";
 import Footer from "../common/Footer"; // Corrected import path
-import axios from "axios"
+import axios from "axios";
 // Define Course Type
 interface Course {
   id: number;
@@ -20,7 +20,7 @@ function Dashboard() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:4000/api/course/getCourse") 
+      .get("http://localhost:4000/api/course/getCourse")
       .then((response) => {
         if (Array.isArray(response.data)) {
           setCourses(response.data);
@@ -99,7 +99,7 @@ function Dashboard() {
             </div>
           </div>
           <div>
-            <div className="min-h-screen bg-gradient-to-b from-white to-emerald-300 px-6 py-12">
+            <div className="min-h-screen bg-linear-to-b from-white to-emerald-300 px-6 py-12">
               <div className="grid place-items-center text-center space-y-8">
                 {/* Heading */}
                 <h1 className="text-5xl font-bold text-white bg-black px-6 py-4 rounded-2xl shadow-lg animate-bounce">

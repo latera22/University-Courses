@@ -8,7 +8,6 @@ import {
 } from "react";
 import axios from "axios"; // Keep axios import
 import Loader from "../common/Loader"; // Corrected import path
-
 interface User {
   email: string;
 }

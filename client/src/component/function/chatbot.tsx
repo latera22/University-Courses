@@ -1,6 +1,4 @@
-import React, { useState } from "react";
-import chatgpticon from "../../assets/chatgpticon.png"; // Adjust the path as necessary
-import { Box, colors } from "@mui/material";
+import { Box } from "@mui/material";
 function Chatbot() {
   return (
     <Box

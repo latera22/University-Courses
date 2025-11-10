@@ -8,8 +8,8 @@ import {
   IconButton,
   Drawer,
   List,
-  ListItem,
   ListItemText,
+  ListItemButton,
 } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -17,7 +17,7 @@ import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../context/appContext";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import MenuIcon from "@mui/icons-material/Menu";
-
+import React from "react";
 interface Course {
   id: string;
   name: string;
@@ -153,12 +153,11 @@ function NavBar() {
                 onClose={() => setMobileOpen(false)}
               >
                 <List sx={{ width: 250 }}>
-                  <ListItem button onClick={handleClick}>
+                  <ListItemButton>
                     <ListItemText primary="Courses" />
-                  </ListItem>
+                  </ListItemButton>
                   {drop.map((course) => (
-                    <ListItem
-                      button
+                    <ListItemButton
                       key={course.id}
                       onClick={() => {
                         navigate(`/courses/${course.id}`);
@@ -166,47 +165,43 @@ function NavBar() {
                       }}
                     >
                       <ListItemText primary={course.name} />
-                    </ListItem>
+                    </ListItemButton>
                   ))}
-                  <ListItem
-                    button
+                  <ListItemButton
                     onClick={() => {
                       navigate("/machine-learning");
                       setMobileOpen(false);
                     }}
                   >
                     <ListItemText primary="Machine Learning" />
-                  </ListItem>
-                  <ListItem
-                    button
+                  </ListItemButton>
+                  <ListItemButton
                     onClick={() => {
                       navigate("/mobile-development");
                       setMobileOpen(false);
                     }}
                   >
                     <ListItemText primary="Mobile App Development" />
-                  </ListItem>
-                  <ListItem
-                    button
+                  </ListItemButton>
+                  <ListItemButton
                     onClick={() => {
                       navigate("/web-development");
                       setMobileOpen(false);
                     }}
                   >
                     <ListItemText primary="Web Development" />
-                  </ListItem>
-                  <ListItem button disabled>
-                    {userData?.email}
-                  </ListItem>
-                  <ListItem
-                    button
+                  </ListItemButton>
+                  <ListItemButton disabled>
+                    <ListItemText primary={userData?.email} />
+                  </ListItemButton>
+                  <ListItemButton
                     onClick={() => {
                       handleLogout();
                       setMobileOpen(false);
                     }}
                   >
                     <ListItemText primary="Logout" />
-                  </ListItem>
+                  </ListItemButton>
                 </List>
               </Drawer>
             </div>

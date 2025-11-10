@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Box, CircularProgress, Typography } from "@mui/material";
-
+import axios from "axios"
 interface Course {
   id: number;
   name: string;
@@ -20,7 +20,7 @@ const CourseDetail: React.FC = () => {
     const fetchCourse = async () => {
       try {
         // This assumes you have a backend endpoint to get a single course by its ID
-        const response = await api.get(`/course/${id}`);
+        const response = await axios.get(`/course/${id}`);
         // Ensure the response is a non-null object before setting the state
         if (typeof response.data === "object" && response.data !== null) {
           setCourse(response.data);

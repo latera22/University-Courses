@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-
+import React from "react";
 interface Category {
   id: number;
   categoryName: string;
@@ -75,9 +75,13 @@ function EditCourse() {
     }
 
     try {
-      await axios.put(`http://localhost:4000/api/course/updateCourse/${id}`, formData, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
+      await axios.put(
+        `http://localhost:4000/api/course/updateCourse/${id}`,
+        formData,
+        {
+          headers: { "Content-Type": "multipart/form-data" },
+        }
+      );
 
       alert("Course updated successfully");
       navigate("/function/view/manageCourse");
@@ -93,7 +97,9 @@ function EditCourse() {
         <h1 className="text-4xl text-center mb-6">Edit Course</h1>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2">Course Name</label>
+            <label className="block text-gray-700 text-sm font-bold mb-2">
+              Course Name
+            </label>
             <input
               type="text"
               className="border rounded w-full py-2 px-3"
@@ -105,7 +111,9 @@ function EditCourse() {
           </div>
 
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2">Course Description</label>
+            <label className="block text-gray-700 text-sm font-bold mb-2">
+              Course Description
+            </label>
             <input
               type="text"
               className="border rounded w-full py-2 px-3"
@@ -117,7 +125,9 @@ function EditCourse() {
           </div>
 
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2">Course Image URL</label>
+            <label className="block text-gray-700 text-sm font-bold mb-2">
+              Course Image URL
+            </label>
             <input
               type="text"
               className="border rounded w-full py-2 px-3"
@@ -128,7 +138,9 @@ function EditCourse() {
           </div>
 
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2">Course University</label>
+            <label className="block text-gray-700 text-sm font-bold mb-2">
+              Course University
+            </label>
             <input
               type="text"
               className="border rounded w-full py-2 px-3"
@@ -140,7 +152,9 @@ function EditCourse() {
           </div>
 
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2">Course Category</label>
+            <label className="block text-gray-700 text-sm font-bold mb-2">
+              Course Category
+            </label>
             <select
               className="border rounded w-full py-2 px-3"
               value={categoryId}
@@ -157,11 +171,15 @@ function EditCourse() {
           </div>
 
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2">Upload File</label>
+            <label className="block text-gray-700 text-sm font-bold mb-2">
+              Upload File
+            </label>
             <input
               type="file"
               className="border rounded w-full py-2 px-3"
-              onChange={(e) => setFile(e.target.files ? e.target.files[0] : null)}
+              onChange={(e) =>
+                setFile(e.target.files ? e.target.files[0] : null)
+              }
             />
           </div>
 

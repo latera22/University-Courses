@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import React from "react";
 function AddCategory() {
   const [categoryName, setCategory] = useState("");
   const [categoryDescription, setCategoryDescription] = useState("");
@@ -76,10 +77,11 @@ function AddCategory() {
             <div className=" pt-7 flex">
               <button
                 type="submit"
-                className="bg-black text-white hover:bg-amber-950 items-center rounded-2xl font-semibold w-40 h-12 "
+                className="bg-black text-white hover:bg-amber-950 items-center rounded-2xl font-semibold w-40 h-12"
               >
                 Add Category
               </button>
+
               <div className="pl-4 mt-1 text-gray-600">
                 Already have a category?
                 <a

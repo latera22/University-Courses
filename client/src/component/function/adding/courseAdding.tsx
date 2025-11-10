@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-
+import React from "react";
 interface Category {
   id: number;
   categoryName: string;

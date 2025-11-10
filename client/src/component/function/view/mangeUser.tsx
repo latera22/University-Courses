@@ -1,10 +1,16 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+
+type User = {
+  _id: string;
+  name: string;
+};
+
 function ManageUser() {
-  const [name, setName] = useState([]);
+  const [name, setName] = useState<User[]>([]);
   useEffect(() => {
     axios
-      .get("http://localhost:4000/api/user/getUser")
+      .get<User[]>("http://localhost:4000/api/user/getUser")
       .then((name) => setName(name.data))
       .catch((err) => {
         console.log(err);

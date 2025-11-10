@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
-
+import React from "react";
 function ResetPassword() {
   const [email, setEmail] = useState("");
   const [otp, setOtp] = useState("");
@@ -64,8 +64,10 @@ function ResetPassword() {
           <div>
             <button
               type="submit"
-              className="bg-black text-white hover:bg-amber-950"
-            ></button>
+              className="bg-black text-white px-4 py-2 rounded-2xl hover:bg-amber-950"
+            >
+              Submit
+            </button>
           </div>
         </form>
       </div>
