@@ -1,8 +1,8 @@
-import express from 'express';
-import userAuth from '../middleware/userAuth';
-import { chatCompletionValidator } from '../controllers/authController';
-import { generateChatCompletion } from '../controllers/chatController';
-export const chatRouter = express.Router();
+import express from "express";
+import { generateChatCompletion } from "../controllers/chatController.js";
+import { protect } from "../middleware/authMiddleware.js";
 
-chatRouter.post('/chat',chatCompletionValidator, userAuth, generateChatCompletion);
-export default chatRouter;
+const router = express.Router();
+router.post("/chat", protect, generateChatCompletion);
+
+export default router;

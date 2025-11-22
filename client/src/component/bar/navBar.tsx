@@ -35,7 +35,11 @@ function NavBar() {
   useEffect(() => {
     axios
       .get("/api/course/courseDropDown")
-      .then((response) => setDrop(response.data))
+      .then((response) => {
+        if (Array.isArray(response.data)) {
+          setDrop(response.data);
+        }
+      })
       .catch((error) => console.error("Error fetching courses:", error));
   }, []);
 

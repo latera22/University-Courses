@@ -38,7 +38,17 @@ export const registration = async (req, res)=>{
         }
 
         await transporter.sendMail(mailOption)
-            return res.json({success: true})
+            return res.json({
+                success: true,
+                message: "Registration Successful",
+                userId: user._id,
+                role: user.role,
+                token,
+                user: {
+                    id: user._id,
+                    email: user.email,
+                    role: user.role
+                }})
 
         
     }
@@ -54,19 +64,15 @@ export const registration = async (req, res)=>{
 /////////////////////////////////////////
 export const login = async (req, res)=>{
     const {email, password} = req.body;
-    const user = await userModel.findOne({ email }); // Rename to "user"
 
     if(!email || !password){
         return res.json({
             success:false, message:"Missing Details"
         })
     }
-    const existingEmail = await userModel.findOne({email})
-
-    if(!existingEmail){
-        return res.json({
-            success:false, message:"User Email Does not exist"
-        })
+    const user = await userModel.findOne({ email });
+    if(!user){
+        return res.json({success:false, message:"User Email Does not exist"})
     }
     const isPasswordMatch = await bcrypt.compare(password, user.password)
 
@@ -232,7 +238,3 @@ export const resetPassword = async(req, res) => {
         return res.json({success:false, message:error.message})
     }
 }
-
-export const chatCompletionValidator = [
-    body("message").notEmpty().withMessage("Message is required"),
-]
