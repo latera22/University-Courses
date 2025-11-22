@@ -25,9 +25,16 @@ app.use(express.urlencoded({
     extended:true
 }))
 app.use(cors({
-    origin: "http://localhost:5173", // Allow frontend origin
+   origin:  [
+        "http://localhost:5173",
+    "https://university-courses-six.vercel.app"
+    ],
+     // Allow frontend origin
     credentials: true, // Allow cookies in cross-origin requests
-  }));app.use(cookieParser({credential:true}))
+  }));
+  
+app.use(cookieParser({credential:true}))
+
 ConnectDB()
 //API Endpoints
 app.get('/', (req, res)=> res.send("API is Working"))
