@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Box, CircularProgress, Typography } from "@mui/material";
-import axios from "axios"
+import axios from "axios";
 interface Course {
   id: number;
   name: string;
@@ -15,22 +15,23 @@ const CourseDetail: React.FC = () => {
   const [course, setCourse] = useState<Course | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const apiBaseUrl = import.meta.env.VITE_API_URL || "";
 
   useEffect(() => {
     const fetchCourse = async () => {
       try {
         // This assumes you have a backend endpoint to get a single course by its ID
-        const response = await axios.get(`/course/${id}`);
+        const response = await axios.get(`${apiBaseUrl}/course/${id}`);
         // Ensure the response is a non-null object before setting the state
         if (typeof response.data === "object" && response.data !== null) {
           setCourse(response.data);
         } else {
           setError(
-            "Failed to fetch course details: Invalid data format received."
+            "Failed to fetch course details: Invalid data format received.",
           );
           console.error(
             "Received unexpected data format for a single course:",
-            response.data
+            response.data,
           );
         }
       } catch (err) {

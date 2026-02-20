@@ -1,7 +1,7 @@
 import { useState, useEffect, ReactNode } from "react";
 import axios from "axios";
 import Loader from "../common/Loader"; // adjust path if needed
-import { AppContext, User, AppContextType } from "./AppContext"; // import the context
+import { AppContext, User, AppContextType } from "./appContext"; // import the context
 
 interface AppContextProviderProps {
   children: ReactNode;

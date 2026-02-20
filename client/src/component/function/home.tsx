@@ -1,7 +1,7 @@
 import userSide from "../../assets/userSide.jpeg";
 import { useNavigate } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
-import { AppContext } from "../context/AppContext";
+import { AppContext } from "../context/appContext";
 import Footer from "../common/Footer"; // Corrected import path
 import axios from "axios";
 // Define Course Type
@@ -17,10 +17,11 @@ function Dashboard() {
   const context = useContext(AppContext);
   const navigate = useNavigate();
   const [courses, setCourses] = useState<Course[]>([]);
+  const apiBaseUrl = import.meta.env.VITE_API_URL || "";
 
   useEffect(() => {
     axios
-      .get("http://localhost:4000/api/course/getCourse")
+      .get(`${apiBaseUrl}/api/course/getCourse`)
       .then((response) => {
         if (Array.isArray(response.data)) {
           setCourses(response.data);

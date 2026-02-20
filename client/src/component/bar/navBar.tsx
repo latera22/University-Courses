@@ -14,7 +14,7 @@ import {
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
-import { AppContext } from "../context/AppContext";
+import { AppContext } from "../context/appContext";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import MenuIcon from "@mui/icons-material/Menu";
 import React from "react";
@@ -31,10 +31,11 @@ function NavBar() {
     useState<null | HTMLElement>(null);
   const [drop, setDrop] = useState<Course[]>([]);
   const [mobileOpen, setMobileOpen] = useState(false); // For mobile drawer
+  const apiBaseUrl = import.meta.env.VITE_API_URL || "";
 
   useEffect(() => {
     axios
-      .get("/api/course/courseDropDown")
+      .get(`${apiBaseUrl}/api/course/courseDropDown`)
       .then((response) => {
         if (Array.isArray(response.data)) {
           setDrop(response.data);
@@ -58,7 +59,11 @@ function NavBar() {
 
   const handleLogout = async () => {
     try {
-      await axios.post("/api/auth/logout", {}, { withCredentials: true });
+      await axios.post(
+        `${apiBaseUrl}/api/auth/logout`,
+        {},
+        { withCredentials: true },
+      );
       setIsLoggedIn(false);
       setUserData(null);
       handleProfileMenuClose();
