@@ -1,7 +1,7 @@
 import userSide from "../../assets/userSide.jpeg";
 import { useNavigate } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
-import { AppContext } from "../context/appContext";
+import { AppContext } from "../context/AppContext";
 import Footer from "../common/Footer"; // Corrected import path
 import axios from "axios";
 // Define Course Type

@@ -21,6 +21,7 @@ function ResetPassword() {
           }
         });
     } catch (error) {
+      console.error(error);
       return console.log("Operation Failed");
     }
   };
