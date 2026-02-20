@@ -10,11 +10,12 @@ function Signup() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const apiBaseUrl = import.meta.env.VITE_API_URL || "";
 
   const handleSignup = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     axios
-      .post("http://localhost:4000/api/auth/registration", {
+      .post(`${apiBaseUrl}/api/auth/registration`, {
         name,
         email,
         password,

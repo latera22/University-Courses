@@ -8,14 +8,15 @@ function Login() {
   const { setIsLoggedIn, setUserData } = useContext(AppContext)!;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const apiBaseUrl = import.meta.env.VITE_API_URL || "";
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // Use axios to send a POST request to the server
     try {
-      const response = await axios.post(
-        "http://localhost:4000/api/auth/login",
-        { email, password },
-      );
+      const response = await axios.post(`${apiBaseUrl}/api/auth/login`, {
+        email,
+        password,
+      });
       console.log("Response Data:", response.data); // Debugging
 
       if (!response.data || !response.data.role || !response.data.token) {

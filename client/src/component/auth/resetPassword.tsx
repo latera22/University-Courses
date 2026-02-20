@@ -5,12 +5,13 @@ function ResetPassword() {
   const [email, setEmail] = useState("");
   const [otp, setOtp] = useState("");
   const [password, setPassword] = useState("");
+  const apiBaseUrl = import.meta.env.VITE_API_URL || "";
 
   const handleResetPassword = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       axios
-        .post("http://localhost:4000/api/auth/reset-password", {
+        .post(`${apiBaseUrl}/api/auth/reset-password`, {
           email,
           otp,
           password,
@@ -33,7 +34,10 @@ function ResetPassword() {
           className="flex items-center justify-center rounded-lg maw-w-md border w-full border-gray-500 "
         >
           <div>
-            <h1 className="font-semibold"> Enter your New Password Here</h1>{" "}
+            <h1 className="font-semibold">
+              {" "}
+              Enter your New Password Here
+            </h1>{" "}
           </div>
           <div>
             <input
