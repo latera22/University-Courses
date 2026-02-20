@@ -14,7 +14,7 @@ import {
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
-import { AppContext } from "../context/appContext";
+import { AppContext } from "../context/AppContext";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import MenuIcon from "@mui/icons-material/Menu";
 import React from "react";
