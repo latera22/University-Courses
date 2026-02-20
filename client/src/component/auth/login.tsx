@@ -2,7 +2,7 @@ import axios from "axios";
 import React from "react";
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { AppContext } from "../context/appContext";
+import { AppContext } from "../context/AppContext";
 function Login() {
   const navigate = useNavigate();
   const { setIsLoggedIn, setUserData } = useContext(AppContext)!;
@@ -14,7 +14,7 @@ function Login() {
     try {
       const response = await axios.post(
         "http://localhost:4000/api/auth/login",
-        { email, password }
+        { email, password },
       );
       console.log("Response Data:", response.data); // Debugging
 

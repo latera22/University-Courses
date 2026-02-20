@@ -12,7 +12,6 @@ import { fileURLToPath } from "url";
 import { dirname } from "path";
 import dotenv from "dotenv"
 
-
 const app = express()
 const port = process.env.PORT || 4000
 const __filename = fileURLToPath(import.meta.url);
@@ -45,6 +44,7 @@ app.use("/api/course", courseRouter)
 app.use("/uploads", express.static("uploads"));
 app.use('/upload/photos/', express.static(path.join(__dirname, 'upload/photos/')));
 
+console.log("Loaded KEY:", process.env.OPENAI_KEY ? "YES" : "NO");
 
 
 app.listen(port, "0.0.0.0",()=>

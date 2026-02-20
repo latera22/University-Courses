@@ -28,6 +28,13 @@ const Chatbot = () => {
       setChat([...newChat, { role: "bot", content: response.message }]);
     } catch (error) {
       console.error("Error sending message:", error);
+      setChat([
+        ...newChat,
+        {
+          role: "bot",
+          content: "Sorry, something went wrong. Please try again.",
+        },
+      ]);
     }
   };
 

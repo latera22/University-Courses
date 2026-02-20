@@ -27,7 +27,7 @@ function Dashboard() {
         } else {
           console.error(
             "Error fetching courses: Data is not an array",
-            response.data
+            response.data,
           );
         }
       })

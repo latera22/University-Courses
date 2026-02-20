@@ -28,5 +28,8 @@
     "nodemon": "^3.1.9",
     "openai": "^6.9.1",
     "react": "^19.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.10.1"
   }
 }
