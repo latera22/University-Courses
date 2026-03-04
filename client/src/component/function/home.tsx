@@ -1,4 +1,4 @@
-import userSide from "../../assets/userSide.jpeg";
+import banner from "../../assets/banner.png";
 import { useNavigate } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../context/AppContext";
@@ -25,7 +25,7 @@ function Dashboard() {
   const navigate = useNavigate();
   const [courses, setCourses] = useState<Course[]>([]);
   const apiBaseUrl = import.meta.env.VITE_API_URL || "";
-
+  const [visibleCourse, setVisibleCourse] = useState(10)
   const isLoggedIn = Boolean(context?.isLoggedIn || context?.user);
 
   useEffect(() => {
@@ -54,39 +54,45 @@ function Dashboard() {
     <>
       <div>
         <div className="min-h-screen flex flex-col ">
-          <div className="relative w-full ">
-            {/* Image */}
-            <img
-              src={userSide}
-              alt="User Side"
-              className="h-auto object-cover"
-            />
+          <div className="relative w-full h-[400px] md:h-[500px] lg:h-[900px]">
+  {/* Banner Image */}
+  <img
+    src={banner}
+    alt="Course Page Banner"
+    className="w-full h-full object-cover"
+  />
 
-            {/* Text Overlay */}
-            <div className="hidden xl:block absolute top-1/2 right-0 transform -translate-y-1/2 text-white text-right ">
-              <h1 className="text-7xl font-semibold text-amber-700 bg-opacity-50 px-4 py-2 rounded-lg">
-                Welcome to
-              </h1>
-              <h1 className="text-7xl font-semibold text-amber-700 bg-opacity-50 px-4 py-2 rounded-lg">
-                University
-              </h1>
-              <h1 className="text-7xl font-semibold text-amber-700 bg-opacity-50 px-4 py-2 rounded-lg">
-                Course!
-              </h1>
-            </div>
-          </div>
+  {/* Dark overlay */}
+  <div className="absolute inset-0 bg-black/30"></div>
 
-          <div className="flex items-center justify-center">
-            <h1 className="text-7xl font-semibold text-blue-700">
-              University Courses
-            </h1>
-          </div>
+  {/* Text Overlay */}
+ <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-center px-4 md:px-8">
+  <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white drop-shadow-lg">
+    Explore Our Courses
+  </h1>
+  <p className="mt-4 text-lg md:text-2xl text-white drop-shadow-md max-w-xl mx-auto">
+    Unlock your potential with our expertly curated university courses. Start learning today and shape your future!
+  </p>
+  <button
+    onClick={() => {if (isLoggedIn) {
+                        navigate(`/courses`);
+                      } else {
+                        navigate(`/auth/login`);
+                      }}}
+    className="mt-6 bg-amber-500 text-black font-semibold px-6 py-3 rounded-lg hover:bg-amber-600 transition"
+  >
+    Browse Courses
+  </button>
+</div>
+</div>
+
+          
 
           <div className="p-4">
             <h1 className="text-3xl font-bold mb-4">Course List</h1>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
               {courses.length > 0 ? (
-                courses.map((course) => (
+                courses.slice(0, visibleCourse).map((course) => (
                   <div
                     key={course.id} // <-- Use id here
                     className="p-4 border rounded-lg shadow-md cursor-pointer transition-all duration-200 hover:shadow-lg hover:scale-105"
