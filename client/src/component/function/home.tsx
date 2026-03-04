@@ -25,7 +25,6 @@ function Dashboard() {
   const navigate = useNavigate();
   const [courses, setCourses] = useState<Course[]>([]);
   const apiBaseUrl = import.meta.env.VITE_API_URL || "";
-  const [visibleCourse, setVisibleCourse] = useState(10)
   const isLoggedIn = Boolean(context?.isLoggedIn || context?.user);
 
   useEffect(() => {
@@ -92,7 +91,7 @@ function Dashboard() {
             <h1 className="text-3xl font-bold mb-4">Course List</h1>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
               {courses.length > 0 ? (
-                courses.slice(0, visibleCourse).map((course) => (
+                courses.slice(0, 15).map((course) => (
                   <div
                     key={course.id} // <-- Use id here
                     className="p-4 border rounded-lg shadow-md cursor-pointer transition-all duration-200 hover:shadow-lg hover:scale-105"
