@@ -4,6 +4,7 @@ import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../context/AppContext";
 import Footer from "../common/Footer"; // Corrected import path
 import axios from "axios";
+
 // Define Course Type
 interface Course {
   id: number;
@@ -14,10 +15,18 @@ interface Course {
 }
 ////
 function Dashboard() {
-  const context = useContext(AppContext);
+  // Define the expected shape of the context value to avoid `any`
+  interface AppContextValue {
+    isLoggedIn?: boolean;
+    user?: unknown | null;
+  }
+
+  const context = useContext(AppContext) as AppContextValue | null;
   const navigate = useNavigate();
   const [courses, setCourses] = useState<Course[]>([]);
   const apiBaseUrl = import.meta.env.VITE_API_URL || "";
+
+  const isLoggedIn = Boolean(context?.isLoggedIn || context?.user);
 
   useEffect(() => {
     axios
@@ -35,7 +44,7 @@ function Dashboard() {
       .catch((error) => {
         console.error("Error fetching courses with axios:", error);
       });
-  }, []);
+  }, [apiBaseUrl]);
   // If context is not available, return null or a loading state
   if (!context) {
     return null; // Or a loading spinner
@@ -79,9 +88,15 @@ function Dashboard() {
               {courses.length > 0 ? (
                 courses.map((course) => (
                   <div
-                    key={course.id}
+                    key={course.id} // <-- Use id here
                     className="p-4 border rounded-lg shadow-md cursor-pointer transition-all duration-200 hover:shadow-lg hover:scale-105"
-                    onClick={() => navigate(`/courses/${course.id}`)} // Make the whole card clickable
+                    onClick={() => {
+                      if (isLoggedIn) {
+                        navigate(`/courses`);
+                      } else {
+                        navigate(`/auth/login`);
+                      }
+                    }}
                   >
                     <img
                       src={course.image}

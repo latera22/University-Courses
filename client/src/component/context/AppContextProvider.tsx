@@ -16,9 +16,19 @@ export const AppContextProvider = ({ children }: AppContextProviderProps) => {
     const apiBaseUrl = import.meta.env.VITE_API_URL || "";
 
     const checkAuth = async () => {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        setIsLoggedIn(false);
+        setUserData(null);
+        setLoading(false);
+        return;
+      }
+
       try {
         const res = await axios.get(`${apiBaseUrl}/api/auth/me`, {
-          withCredentials: true,
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         });
 
         if (res.data && res.data.email) {

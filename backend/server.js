@@ -33,7 +33,9 @@ app.use(cors({
   
 app.options('*', cors()); // Enable pre-flight requests for all routes
 app.use(cookieParser({credential:true}))
+// Express.js
 
+app.use("/uploads", express.static("uploads"));
 ConnectDB()
 //API Endpoints
 app.get('/', (req, res)=> res.send("API is Working"))
