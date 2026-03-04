@@ -14,8 +14,7 @@ import Chatbot from "./component/function/chatbot";
 import EditCourse from "./component/edit/editCourse";
 import Courses from "./component/function/Courses/courses";
 
-import CourseDetail from "./component/function/Courses/CourseDetail"
-function App() {
+import CourseDetail from "./component/function/Courses/courseDetail";function App() {
   return (
     <>
       <NavBar></NavBar>
